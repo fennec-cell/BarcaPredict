@@ -31,3 +31,13 @@ def scores(y_true, y_pred, y_proba=None):
     if y_proba is not None:
         res["log_loss"] = log_loss(y_true, y_proba, labels=CLASSES)
     return res
+
+VAL_SEASONS = [2324]
+TEST_ONLY = [2425, 2526]
+
+def split3(df):
+    """train / val / test: подбираем на val, test открываем в конце."""
+    s = df[SEASON_COL].astype(int)
+    return (df[s.isin(TRAIN_SEASONS)],
+            df[s.isin(VAL_SEASONS)],
+            df[s.isin(TEST_ONLY)])
