@@ -11,6 +11,7 @@ CLASSES = ["A", "D", "H"]  # по алфавиту, как у sklearn
 # Подставь по факту: что выведет sorted(df["season"].unique())
 TRAIN_SEASONS = [1415, 1516, 1617, 1718, 1819,
                  1920, 2021, 2122, 2223]
+                 
 TEST_SEASONS = [2324, 2425, 2526]
 
 def split(df):
