@@ -1,16 +1,17 @@
 import numpy as np
 import pandas as pd
-from evaluate import split, scores, TARGET_COL, CLASSES
+from sklearn.dummy import DummyClassifier
+from evaluate import split3, scores, TARGET_COL
 
 df = pd.read_csv("data/processed/matches_clean.csv")
-train, test = split(df)
-y = test[TARGET_COL]
+train, val, test = split3(df)
 
-# Прогноз: всегда победа хозяев
-pred = np.array(["H"] * len(test))
+# «всегда H»: DummyClassifier предсказывает самый частый исход в train
+dummy = DummyClassifier(strategy="prior")
+dummy.fit(np.zeros((len(train), 1)), train[TARGET_COL])
 
-# Вероятности: доли исходов в train (для log loss)
-freq = train[TARGET_COL].value_counts(normalize=True)
-proba = np.tile([freq[c] for c in CLASSES], (len(test), 1))
-
-print(scores(y, pred, proba))
+for name, part in [("val", val), ("test", test)]:
+    X = np.zeros((len(part), 1))
+    pred = dummy.predict(X)
+    proba = dummy.predict_proba(X)
+    print(name, scores(part[TARGET_COL], pred, proba))

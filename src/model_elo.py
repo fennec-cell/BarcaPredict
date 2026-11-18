@@ -6,7 +6,7 @@ df = pd.read_csv("data/processed/matches_elo.csv")
 train, val, test = split3(df)
 
 feats = ["elo_diff"]
-model = LogisticRegression(max_iter=1000)
+model = LogisticRegression(max_iter=1000, random_state=42)
 model.fit(train[feats], train[TARGET_COL])
 
 pred = model.predict(val[feats])

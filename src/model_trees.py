@@ -12,7 +12,7 @@ feats = ["elo_diff", "form_diff", "gd_diff", "h_elo", "a_elo"]
 
 models = {
     "логрегрессия": make_pipeline(StandardScaler(),
-                              LogisticRegression(max_iter=1000)),
+                              LogisticRegression(max_iter=1000, random_state=42)),
     "случайный лес": RandomForestClassifier(
         n_estimators=300, max_depth=4, min_samples_leaf=20, random_state=42),
     "градиентный бустинг": HistGradientBoostingClassifier(

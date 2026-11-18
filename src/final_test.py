@@ -10,7 +10,7 @@ train, val, test = split3(df)
 fit_data = pd.concat([train, val])  # обучаем на train + val
 
 feats = ["elo_diff", "form_diff", "gd_diff", "h_elo", "a_elo"]
-model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, random_state=42))
 model.fit(fit_data[feats], fit_data[TARGET_COL])
 
 pred = model.predict(test[feats])
