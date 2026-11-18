@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Derived feature files (пересоздаются скриптами в src/)
+data/processed/matches_elo.csv
+data/processed/matches_features.csv
