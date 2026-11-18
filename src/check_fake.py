@@ -14,7 +14,7 @@ train, test = split(df)
 assert set(train["season"]).isdisjoint(set(test["season"]))
 
 feats = [f"f{i}" for i in range(5)]
-model = LogisticRegression(max_iter=1000)
+model = LogisticRegression(max_iter=1000, random_state=42)
 model.fit(train[feats], train[TARGET_COL])
 
 pred = model.predict(test[feats])
