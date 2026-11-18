@@ -74,6 +74,22 @@ barca-predict/
 Результаты матчей Ла Лиги берутся с [football-data.co.uk](https://www.football-data.co.uk/)
 (файлы `SP1_*.csv`), затем очищаются в `data/processed/matches_clean.csv`.
 
+## Публичный доступ (деплой)
+
+Самый простой бесплатный способ — **Streamlit Community Cloud**:
+
+1. Войдите на [share.streamlit.io](https://share.streamlit.io) через GitHub.
+2. «New app» → выберите репозиторий `BarcaPredict`, ветку `app`
+   и файл `app/app.py`.
+3. Если репозиторий приватный — разрешите Streamlit доступ к нему.
+4. Нажмите «Deploy». Через 1–2 минуты появится публичная ссылка вида
+   `https://<имя>.streamlit.app`, которая откроется на любом устройстве.
+
+Зависимости берутся из `requirements.txt`, модель — из
+`models/barca_model.joblib`.
+
+> Бесплатные приложения «засыпают» после простоя и просыпаются при первом заходе.
+
 ## Дисклеймер
 
 ⚠️ Учебная модель: результаты не являются рекомендацией для ставок.
