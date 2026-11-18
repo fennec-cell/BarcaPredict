@@ -98,3 +98,22 @@ def test_form_value_example():
     out = add_form(pd.DataFrame(rows))
     # форма в 4-м матче = (3 + 1 + 0) / 3
     assert abs(out.loc[3, "h_form"] - 4 / 3) < 1e-9
+
+# ---------- Сборка таблицы (src/features.py) ----------
+
+def test_build_features_equals_two_steps():
+    from features import build_features, check_features
+    m = fake_matches()
+    out = build_features(m)
+    expected = add_form(build_elo_features(m))
+    pd.testing.assert_frame_equal(out, expected)
+    # пропусков нет в признаках модели, форма пустая только у первых матчей команд
+    empty = check_features(out, n_rows=len(m))
+    assert empty > 0
+
+
+def test_build_features_needs_columns():
+    import pytest
+    from features import build_features
+    with pytest.raises(ValueError):
+        build_features(fake_matches().drop(columns=["home_goals"]))
