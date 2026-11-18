@@ -1,3 +1,4 @@
+#elo_expected считает E elo_update считает дельту и возвращает два новых рейтинга. Это ровно ваши ручные формулы.
 def elo_expected(r_home, r_away, home_adv=100):
     return 1 / (1 + 10 ** ((r_away - (r_home + home_adv)) / 400))
 
